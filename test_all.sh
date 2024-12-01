@@ -54,5 +54,9 @@ for NUM in {1..5}; do
     done
 done
 
+if [ "$STATUS" -eq 1 ]; then
+    echo -e "\033[1;31mSOME TESTS FAILED!\033[0m"
+fi
+
 # Exit with the overall status
 exit ${STATUS}
