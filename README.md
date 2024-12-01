@@ -33,7 +33,7 @@ So if you add for example ex2.asm and ex4.asm - only tests2 and tests4 will run.
 
 =-=-=-=-= Adding more tests =-=-=-=-=
 Feel free to add and share more test cases.
-To add a test, name it whatever you like and put it in the testsN (1 <= N <= 5) folder.
+To add a test, name it whatever you like and put it in the testsN (1 <= N <= 5) folder. 
 
 
 Good luck with the debugging!
