@@ -18,4 +18,4 @@ bad_exit:
 .section .data
 Num1: .int 0x80000000
 Num2: .int 0x00000001
-BitCheck: .int 0
+BitCheck: .byte 0
