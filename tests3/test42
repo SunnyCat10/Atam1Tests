@@ -1,0 +1,130 @@
+.global _start
+
+.section .text
+
+  movq root, %rdi
+  xor %r8, %r8
+  movl __ExpectedArraySize, %r8d
+  movq $__ExpectedArray, %r9
+  movq $0, %r10
+  call rec
+
+  cmp %r10, %r8
+  jne bad_exit
+  
+  movq $60, %rax
+  movq $0, %rdi
+  syscall
+
+bad_exit:
+  movq $60, %rax
+  movq $1, %rdi
+  syscall
+
+rec:
+  pushq %rdi
+  movq (%rdi), %r11
+  cmp $0, %r11
+  je skip_left
+  movq %r11, %rdi
+  call rec
+  movq (%rsp), %rdi
+skip_left:
+  cmpq %r8, %r10
+  je bad_exit
+  movl 8(%rdi), %eax
+  movl (%r9, %r10, 4), %edx
+  cmpl %eax, %edx
+  jne bad_exit
+  inc %r10
+
+  movq 12(%rdi), %r11
+  cmp $0, %r11
+  je skip_right
+  movq %r11, %rdi
+  call rec
+skip_right:
+  popq %rdi
+  ret
+
+
+.section .data
+__ExpectedArray: .int -2054518556, -1999885757, -1875124726, -1748873449, -1319660113, -893502547, -819920951, -780192827, -665715432, -526575630, -501631370, -271252267, 310422227, 442343406, 524884435, 866218481, 978538376, 1247853441, 1604311629, 1761753168, 1785177525, 1795002501
+__Garbage_429233249: .byte 91, 123, 221, 138, 135, 148
+__ExpectedArraySize: .int 22
+__Garbage_33080742: .byte 186, 119, 133, 97, 117, 81, 53, 163, 132
+__Nodes:
+.quad 0
+.int -1319660113
+.quad 0
+.quad 0
+.int 1604311629
+.quad 0
+.quad __Nodes + 180
+.int -893502547
+.quad __Nodes + 280
+.quad 0
+.int -2054518556
+.quad __Nodes + 140
+.quad 0
+.int -1875124726
+.quad 0
+.quad 0
+.int -526575630
+.quad 0
+.quad 0
+.int 524884435
+.quad 0
+.quad 0
+.int -1999885757
+.quad __Nodes + 80
+.quad __Nodes + 100
+.int -501631370
+.quad __Nodes + 420
+.quad __Nodes + 60
+.int -1748873449
+.quad __Nodes + 0
+.quad 0
+.int 978538376
+.quad __Nodes + 340
+.quad 0
+.int -271252267
+.quad __Nodes + 300
+.quad 0
+.int 310422227
+.quad 0
+.quad 0
+.int 1795002501
+.quad 0
+.quad __Nodes + 360
+.int -665715432
+.quad __Nodes + 160
+.quad __Nodes + 240
+.int 442343406
+.quad __Nodes + 120
+.quad 0
+.int -819920951
+.quad 0
+.quad __Nodes + 400
+.int 1761753168
+.quad __Nodes + 380
+.quad __Nodes + 320
+.int -780192827
+.quad 0
+.quad 0
+.int 1785177525
+.quad __Nodes + 260
+.quad 0
+.int 1247853441
+.quad __Nodes + 20
+.quad __Nodes + 220
+.int 866218481
+.quad __Nodes + 200
+__Garbage_790860649: .byte 209, 164
+root:
+.quad __Nodes + 40
+__Garbage_190438781: .byte 164, 225, 96, 61, 251
+node:
+.quad 1987355961
+.int -526575630
+.quad 1712702734
